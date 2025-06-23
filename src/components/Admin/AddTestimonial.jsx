@@ -44,6 +44,8 @@ const AddTestimonial = () => {
                 },
             });
 
+            console.log('Request body:', formData);
+
             setName("");
             setMessage("");
             setRating(0);

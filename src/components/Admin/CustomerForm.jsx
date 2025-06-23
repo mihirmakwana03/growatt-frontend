@@ -42,7 +42,7 @@ const CustomerForm = () => {
   // Add New Customer
   const handleAddCustomer = async () => {
     try {
-      const response = await axios.post(API_URL, newCustomer);
+      const response = await axios.post(`${API_URL}/customers`, newCustomer);
       setCustomers([...customers, response.data]);
       setFilteredCustomers([...customers, response.data]);
       setShowModal(false);
@@ -64,7 +64,7 @@ const CustomerForm = () => {
   // Fetch customer data
   const fetchCustomers = async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get(`${API_URL}/customers`);
       const data = Array.isArray(response.data) ? response.data : [];
       setCustomers(data);
       setFilteredCustomers(data);
