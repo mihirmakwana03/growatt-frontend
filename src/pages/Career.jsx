@@ -37,7 +37,6 @@ const benefits = [
 ];
 
 const API_URL = import.meta.env.VITE_API_URL;
-const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || "6LdtrvgqAAAAABmj3YRQhv7d-YzEOjkts7TyH9gR";
 
 export default function Career() {
   const [jobs, setJobs] = useState([]);
@@ -52,7 +51,6 @@ export default function Career() {
     coverLetter: null,
   });
   const [recaptchaValue, setRecaptchaValue] = useState(null);
-  const [recaptchaError, setRecaptchaError] = useState(false);
   useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -99,7 +97,7 @@ export default function Career() {
       return;
     }
 
-    if (!recaptchaValue && !recaptchaError) {
+    if (!recaptchaValue) {
       alert("Please complete the reCAPTCHA verification");
       return;
     }
@@ -119,9 +117,7 @@ export default function Career() {
       applicationData.bachelorsDegree
     );
     applicationFormData.append("resume", applicationData.resume);
-    if (recaptchaValue) {
-      applicationFormData.append("captcha", recaptchaValue);
-    }
+    applicationFormData.append("captcha", recaptchaValue); // ✅ Include reCAPTCHA token
 
     try {
       const response = await axios.post(`${API_URL}/applications`, applicationFormData);
@@ -143,13 +139,8 @@ export default function Career() {
 
       setSelectedJob(null);
     } catch (error) {
-      alert(error.response?.data?.message || error.message);
+      alert(error.message);
     }
-  };
-
-  const handleRecaptchaError = () => {
-    setRecaptchaError(true);
-    console.warn("reCAPTCHA failed to load - this may be due to domain configuration");
   };
 
   return (
@@ -415,21 +406,11 @@ export default function Career() {
                 </div>
 
                 <div className="mt-4 mb-4">
-                  {!recaptchaError ? (
-                    <ReCAPTCHA
-                      sitekey={RECAPTCHA_SITE_KEY}
-                      onChange={(value) => setRecaptchaValue(value)}
-                      onError={handleRecaptchaError}
-                      onExpired={() => setRecaptchaValue(null)}
-                      theme="dark"
-                    />
-                  ) : (
-                    <div className="p-4 bg-yellow-500/20 border border-yellow-500/50 rounded-lg">
-                      <p className="text-yellow-300 text-sm">
-                        reCAPTCHA verification is temporarily unavailable. You can still submit your application.
-                      </p>
-                    </div>
-                  )}
+                  <ReCAPTCHA
+                    sitekey="6LdtrvgqAAAAABmj3YRQhv7d-YzEOjkts7TyH9gR"
+                    onChange={(value) => setRecaptchaValue(value)}
+                    theme="dark"
+                  />
                 </div>
 
                 <div className="flex gap-4">
