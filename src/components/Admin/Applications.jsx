@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
 const ApplicationForm = () => {
   const [applications, setApplications] = useState([]);
@@ -19,17 +20,16 @@ const ApplicationForm = () => {
   const [filterBachelorsPer, setFilterBachelorsPer] = useState("");
   const [filterStatus, setFilterStatus] = useState(""); // New filter for status
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     fetchApplications();
   }, []);
 
   const fetchApplications = async () => {
     try {
-      const response = await fetch("http://localhost:5000/applications");
-      if (!response.ok) {
-        throw new Error("Failed to fetch applications");
-      }
-      const data = await response.json();
+      const response = await axios.get(`${API_URL}/applications`);
+      const data = response.data;
       setApplications(data);
       setFilteredApps(data);
       setLoading(false);
@@ -77,12 +77,7 @@ const ApplicationForm = () => {
       return;
 
     try {
-      const response = await fetch(`http://localhost:5000/applications/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) throw new Error("Failed to delete application");
-
+      const response = await axios.delete(`${API_URL}/applications/${id}`);
       setApplications((prev) => prev.filter((app) => app._id !== id));
       alert("✅ Application deleted successfully!");
     } catch (error) {
@@ -103,33 +98,23 @@ const ApplicationForm = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/email/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          to: emailData.recipient,
-          subject: emailData.subject,
-          name: emailData.name,
-          jobTitle: emailData.jobTitle,
-        }),
+      const response = await axios.post(`${API_URL}/email/send`, {
+        to: emailData.recipient,
+        subject: emailData.subject,
+        name: emailData.name,
+        jobTitle: emailData.jobTitle,
       });
-
-      const data = await response.json();
-
-      if (response.ok) {
+      const data = response.data;
+      if (response.status === 200) {
         alert("✅ Email sent successfully!");
 
         // Update status in the database
-        const updateResponse = await fetch(
-          `http://localhost:5000/applications/${selectedApplication._id}`,
-          {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ status: "Mail Sent" }),
-          }
+        const updateResponse = await axios.patch(
+          `${API_URL}/applications/${selectedApplication._id}`,
+          { status: "Mail Sent" }
         );
 
-        if (!updateResponse.ok) {
+        if (updateResponse.status !== 200) {
           throw new Error(
             "Failed to update application status in the database"
           );
@@ -286,7 +271,7 @@ const ApplicationForm = () => {
                     </span>
                   </p>
                   <a
-                    href={`http://localhost:5000${app.resume}`}
+                    href={`${API_URL}${app.resume}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-500 underline"

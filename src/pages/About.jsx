@@ -26,13 +26,15 @@ const stats = [
   },
 ];
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function About() {
   const [teamMembers, setTeamMembers] = useState([]);
 
   useEffect(() => {
     const fetchTeamMembers = async () => {
       try {
-        const response = await fetch('http://localhost:5000/team');
+        const response = await fetch(`${API_URL}/team`);
         if (!response.ok) {
           throw new Error('Failed to fetch team members');
         }
@@ -113,7 +115,7 @@ export default function About() {
                 <div className="flex flex-col md:flex-row items-center gap-8">
                   <img
                     crossOrigin="anonymous"
-                    src={`http://localhost:5000/membersImg/${member.image}`}
+                    src={`${API_URL}/membersImg/${member.image}`}
                     alt={member.name}
                     className="w-40 h-40 rounded-full object-cover"
                   />

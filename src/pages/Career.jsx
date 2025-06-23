@@ -11,6 +11,7 @@ import {
   Trophy,
   Heart,
 } from "lucide-react";
+import axios from 'axios';
 
 const benefits = [
   {
@@ -35,6 +36,8 @@ const benefits = [
   },
 ];
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Career() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -54,15 +57,9 @@ export default function Career() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/careers", { mode: "cors" })
+    axios.get(`${API_URL}/careers`, { withCredentials: false })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch jobs");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setJobs(data);
+        setJobs(response.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -72,14 +69,8 @@ export default function Career() {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:5000/teamstories')
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Failed to fetch team stories');
-        }
-        return res.json();
-      })
-      .then((data) => setTeamStories(data))
+    axios.get(`${API_URL}/teamstories`)
+      .then((res) => setTeamStories(res.data))
       .catch((err) => {
         console.error('TeamStories Error:', err);
         setError(err.message);
@@ -129,12 +120,9 @@ export default function Career() {
     applicationFormData.append("captcha", recaptchaValue); // ✅ Include reCAPTCHA token
 
     try {
-      const response = await fetch("http://localhost:5000/applications", {
-        method: "POST",
-        body: applicationFormData,
-      });
+      const response = await axios.post(`${API_URL}/applications`, applicationFormData);
 
-      const data = await response.json();
+      const data = response.data;
       if (!response.ok)
         throw new Error(data.message || "Failed to submit application");
 
@@ -209,7 +197,7 @@ export default function Career() {
               >
                 <div className="flex items-center gap-4 mb-4">
                   <img
-                    src={`http://localhost:5000/storyImg/${story.image}`}
+                    src={`${API_URL}/storyImg/${story.image}`}
                     alt={story.name}
                     className="w-16 h-16 rounded-full object-cover"
                     crossOrigin="anonymous"

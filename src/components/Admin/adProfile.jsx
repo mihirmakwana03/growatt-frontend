@@ -3,6 +3,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { updateUserStart, updateUserFailure, updateUserSuccess } from '../../redux/admin/adminSlice';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const AdProfile = () => {
     const { currentUser, loading, error } = useSelector(state => state.user);
@@ -29,7 +32,7 @@ const AdProfile = () => {
 
         try {
             dispatch(updateUserStart());
-            const res = await fetch(`http://localhost:5000/admin/user/update/${currentUser._id}`, {
+            const res = await fetch(`${API_URL}/admin/user/update/${currentUser._id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

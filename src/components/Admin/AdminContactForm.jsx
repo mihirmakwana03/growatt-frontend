@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AdminContactForm() {
     const [info, setInfo] = useState({
@@ -18,7 +21,7 @@ export default function AdminContactForm() {
     const [success, setSuccess] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:5000/contactinfo")
+        fetch(`${API_URL}/contactinfo`)
             .then((res) => res.json())
             .then((data) => {
                 setInfo(data || {
@@ -59,7 +62,7 @@ export default function AdminContactForm() {
         setSuccess(null);
         setLoading(true);
         try {
-            const res = await fetch("http://localhost:5000/contactinfo", {
+            const res = await fetch(`${API_URL}/contactinfo`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(info),

@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import ServiceCard from '../components/ServiceCard';
 import { services } from '../data/services';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Pricing() {
   const [plans, setPlans] = useState([]);
   const sectionRef = useRef(null);
@@ -11,7 +13,7 @@ export default function Pricing() {
   useEffect(() => {
     const fetchPricing = async () => {
       try {
-        const res = await fetch('http://localhost:5000/pricing');
+        const res = await fetch(`${API_URL}/pricing`);
         const data = await res.json();
         console.log('Fetched data:', data);
         setPlans(data);

@@ -3,6 +3,8 @@ import axios from "axios";
 import ApplicationsList from "./Dashboard Components/applicationApplyComponent";
 import InquiryList from "./Dashboard Components/inquiryComponents";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const AdDashboard = () => {
     const [stats, setStats] = useState({ total: 0, active: 0 });
     const [loading, setLoading] = useState(true);
@@ -11,7 +13,7 @@ const AdDashboard = () => {
     useEffect(() => {
         const fetchJobStats = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/careers");
+                const response = await axios.get(`${API_URL}/careers`);
                 console.log("✅ Fetched jobs:", response.data);
 
                 const jobs = response.data;

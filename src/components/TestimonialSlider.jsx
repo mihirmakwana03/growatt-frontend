@@ -5,6 +5,7 @@ import { FaStar } from "react-icons/fa";
 const TestimonialSlider = () => {
   const [testimonials, setTestimonials] = useState([]);
   const [current, setCurrent] = useState(0);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetchTestimonials();
@@ -12,7 +13,6 @@ const TestimonialSlider = () => {
 
   const fetchTestimonials = async () => {
     try {
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
       const res = await axios.get(`${API_URL}/testimonials`);
       setTestimonials(res.data);
     } catch (error) {
@@ -54,7 +54,7 @@ const TestimonialSlider = () => {
           </span>
         </h2>
         <p className="text-center text-gray-400 mb-12 text-lg max-w-2xl mx-auto">
-          We value our clients and their feedback. Here’s what they have to say about our services.
+          We value our clients and their feedback. Here's what they have to say about our services.
         </p>
         {testimonials.length > 0 ? (
           <div className="relative">
@@ -67,14 +67,14 @@ const TestimonialSlider = () => {
                   crossOrigin="anonymous"
                   src={
                     testimonials[current].imageUrl
-                      ? `http://localhost:5000${testimonials[current].imageUrl}`
+                      ? `${API_URL}${testimonials[current].imageUrl}`
                       : defaultImage
                   }
                   alt={testimonials[current].name}
                   className="w-24 h-24 rounded-full border-4 border-[#2A3FFB] shadow-lg mb-6 object-cover"
                 />
                 <p className="text-xl text-gray-200 italic mb-6 text-center leading-relaxed">
-                  “{testimonials[current].message}”
+                  "{testimonials[current].message}"
                 </p>
                 <div className="mb-4 flex justify-center">
                   {Array.from({ length: testimonials[current].rating || 0 }).map(

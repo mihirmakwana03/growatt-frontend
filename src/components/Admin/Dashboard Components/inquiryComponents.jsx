@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
 function AdInquiry() {
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const API_URL = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         fetchContacts();
@@ -10,16 +12,10 @@ function AdInquiry() {
 
     // Fetch all contacts
     const fetchContacts = () => {
-        fetch("http://localhost:5000/contact/inquiry")
+        axios.get(`${API_URL}/contact/inquiry`)
             .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
                 // Sort contacts so the latest message appears on top
-                const sortedContacts = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                const sortedContacts = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 setContacts(sortedContacts);
                 setLoading(false);
             })

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import {
   Facebook as FacebookIcon,
   Twitter as TwitterIcon,
@@ -9,6 +10,8 @@ import {
   Phone,
   MapPin,
 } from 'lucide-react';
+
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 // TermsAndConditions component
 function TermsAndConditions() {
@@ -43,8 +46,8 @@ export default function Footer() {
   useEffect(() => {
     const fetchContactInfo = async () => {
       try {
-        const res = await fetch('http://localhost:5000/contactinfo');
-        const data = await res.json();
+        const res = await axios.get(`${API_URL}/contactinfo`);
+        const data = res.data;
         setContactInfo({
           phone: data.phone,
           email: data.email,

@@ -10,8 +10,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000', // Local backend URL
+        target: process.env.VITE_API_URL, // Use environment variable for deployment
         changeOrigin: true,
+        secure: process.env.NODE_ENV === 'production', // Enable SSL verification in production
       },
     },
   },

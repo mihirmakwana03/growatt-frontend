@@ -14,6 +14,9 @@ import {
   Instagram as InstagramIcon,
   Upload,
 } from "lucide-react";
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -40,8 +43,8 @@ export default function Contact() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:5000/contactinfo");
-        const data = await res.json();
+        const res = await axios.get(`${API_URL}/contactinfo`);
+        const data = res.data;
         if (data) {
           setContactInfo([
             {
@@ -145,17 +148,12 @@ export default function Contact() {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/contact/submitcontact",
-        {
-          method: "POST",
-          body: form,
-        }
+      const response = await axios.post(
+        `${API_URL}/contact/submitcontact`,
+        form
       );
-
-      const data = await response.json();
-
-      if (response.ok) {
+      const data = response.data;
+      if (response.status === 200) {
         setResponseMessage("✅ Form submitted successfully!");
         setFormData({
           fullName: "",

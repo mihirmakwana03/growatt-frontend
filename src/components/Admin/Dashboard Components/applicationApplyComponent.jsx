@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const ApplicationsList = () => {
     const [applications, setApplications] = useState([]);
@@ -9,7 +10,7 @@ const ApplicationsList = () => {
     useEffect(() => {
         const fetchApplications = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/applications");
+                const response = await axios.get(`${API_URL}/applications`);
                 console.log("✅ Fetched applications:", response.data);
 
                 // Sort applications by createdAt date (latest first)

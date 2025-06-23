@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const TeamStories = () => {
     const [teamMembers, setTeamMembers] = useState([]);
@@ -8,11 +11,10 @@ const TeamStories = () => {
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
-        fetch("http://localhost:5000/teamstories")
-            .then((res) => res.json())
-            .then((data) => {
-                setTeamMembers(data);
-                setFilteredMembers(data);
+        axios.get(`${API_URL}/teamstories`)
+            .then((res) => {
+                setTeamMembers(res.data);
+                setFilteredMembers(res.data);
             })
             .catch((error) => console.error("Error fetching team members:", error));
     }, []);
@@ -33,32 +35,35 @@ const TeamStories = () => {
         formDataObj.append("message", formData.message);
         formDataObj.append("image", formData.image);
 
-        const response = await fetch("http://localhost:5000/teamstories/add", {
-            method: "POST",
-            body: formDataObj,
-        });
-
-        if (response.ok) {
-            alert("Team member added!");
-            setShowModal(false);
-            setFormData({ name: "", designation: "", message: "", image: null });
-            const updated = await fetch("http://localhost:5000/teamstories").then(res => res.json());
-            setTeamMembers(updated);
-            setFilteredMembers(updated);
-        } else {
+        try {
+            const response = await axios.post(`${API_URL}/teamstories/add`, formDataObj);
+            if (response.status === 200) {
+                alert("Team member added!");
+                setShowModal(false);
+                setFormData({ name: "", designation: "", message: "", image: null });
+                const updated = await axios.get(`${API_URL}/teamstories`).then(res => res.data);
+                setTeamMembers(updated);
+                setFilteredMembers(updated);
+            } else {
+                alert("Failed to add team member.");
+            }
+        } catch (error) {
             alert("Failed to add team member.");
         }
     };
 
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this member?")) {
-            const response = await fetch(`http://localhost:5000/teamstories/delete/${id}`, { method: "DELETE" });
-
-            if (response.ok) {
-                alert("Member deleted!");
-                setTeamMembers(teamMembers.filter((m) => m._id !== id));
-                setFilteredMembers(filteredMembers.filter((m) => m._id !== id));
-            } else {
+            try {
+                const response = await axios.delete(`${API_URL}/teamstories/delete/${id}`);
+                if (response.status === 200) {
+                    alert("Member deleted!");
+                    setTeamMembers(teamMembers.filter((m) => m._id !== id));
+                    setFilteredMembers(filteredMembers.filter((m) => m._id !== id));
+                } else {
+                    alert("Failed to delete member.");
+                }
+            } catch (error) {
                 alert("Failed to delete member.");
             }
         }
@@ -88,7 +93,7 @@ const TeamStories = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {filteredMembers.map((member) => (
                     <div key={member._id} className="bg-white shadow rounded p-4 text-center">
-                        <img src={`http://localhost:5000/storyImg/${member.image}`} alt={member.name} className="w-24 h-24 rounded-full mx-auto object-cover" crossOrigin="anonymous" />
+                        <img src={`${API_URL}/storyImg/${member.image}`} alt={member.name} className="w-24 h-24 rounded-full mx-auto object-cover" crossOrigin="anonymous" />
                         <h5 className="mt-4 font-bold text-lg text-black">{member.name}</h5>
                         <h5 className="mt-1 text-sm text-gray-700">{member.message}</h5>
                         <p className="text-gray-500 mt-1">{member.designation}</p>

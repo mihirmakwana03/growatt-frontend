@@ -7,7 +7,7 @@ import { TestimonialSlider } from '../components/TestimonialSlider';
 import { GoogleReviewsWidget } from '../components/GoogleReviewsWidget';
 
 // Use API_URL from environment variables; fallback to localhost for development.
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Home() {
   const sectionRef = useRef(null);

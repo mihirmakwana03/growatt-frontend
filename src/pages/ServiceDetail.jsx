@@ -19,12 +19,12 @@ export default function ServiceDetail() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/portfolio")
+      .get(`${API_URL}/portfolio`)
       .then((res) => setPortfolio(res.data))
       .catch((err) => console.error(err));
 
     axios
-      .get("http://localhost:5000/pricing")
+      .get(`${API_URL}/pricing`)
       .then((res) => {
         console.log("Pricing data:", res.data); // Debug: See what's coming back
 

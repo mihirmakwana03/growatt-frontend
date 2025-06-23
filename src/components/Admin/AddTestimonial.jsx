@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const AddTestimonial = () => {
     const [name, setName] = useState("");
     const [message, setMessage] = useState("");
@@ -19,7 +21,7 @@ const AddTestimonial = () => {
 
     const fetchTestimonials = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/testimonials");
+            const res = await axios.get(`${API_URL}/testimonials`);
             setTestimonials(res.data);
         } catch (error) {
             console.error("❌ Error fetching testimonials:", error);
@@ -36,7 +38,7 @@ const AddTestimonial = () => {
             formData.append("rating", rating);
             formData.append("image", imageUrl);
 
-            await axios.post("http://localhost:5000/testimonials", formData, {
+            await axios.post(`${API_URL}/testimonials`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -60,7 +62,7 @@ const AddTestimonial = () => {
         }
 
         try {
-            await axios.delete("http://localhost:5000/testimonials", {
+            await axios.delete(`${API_URL}/testimonials`, {
                 headers: { "Content-Type": "application/json" },
                 data: { ids: selectedIds },
             });

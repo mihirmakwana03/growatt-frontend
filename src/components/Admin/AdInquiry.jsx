@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 function AdInquiry() {
   const [contacts, setContacts] = useState([]);
@@ -12,22 +15,15 @@ function AdInquiry() {
   }, []);
 
   // Fetch all contacts
-  const fetchContacts = () => {
-    fetch("http://localhost:5000/contact/inquiry")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setContacts(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching contacts:", error);
-        setLoading(false);
-      });
+  const fetchContacts = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/contact/inquiry`);
+      setContacts(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching contacts:", error);
+      setLoading(false);
+    }
   };
 
   // Open delete confirmation modal
@@ -47,16 +43,7 @@ function AdInquiry() {
     if (!selectedContact) return;
 
     try {
-      const response = await fetch(
-        `http://localhost:5000/contact/delete/${selectedContact}`,
-        {
-          method: "DELETE",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to delete contact");
-      }
+      await axios.delete(`${API_URL}/contact/delete/${selectedContact}`);
 
       // Remove deleted contact from state
       setContacts(
@@ -142,7 +129,7 @@ function AdInquiry() {
                 <strong>File:</strong>{" "}
                 {contact.files ? (
                   <a
-                    href={`http://localhost:5000/contactuploadsimg/${contact.files}`}
+                    href={`${API_URL}/contactuploadsimg/${contact.files}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-500 hover:underline font-bold"
@@ -191,6 +178,22 @@ function AdInquiry() {
               className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mr-2"
               onClick={handleDelete}
             >
+              Delete
+            </button>
+            <button
+              className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2 hover:bg-gray-400"
+              onClick={closeDeleteModal}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default AdInquiry;
               Delete
             </button>
             <button

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Signup = () => {
     const [formData, setFormData] = React.useState({
@@ -13,6 +14,8 @@ const Signup = () => {
     const [loading, setLoading] = React.useState(false);
     const navigate = useNavigate();
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -25,34 +28,26 @@ const Signup = () => {
         setLoading(true);
         setError(null);
         setSuccess(null); // Clear success message on new submission
-
-        const res = await fetch('http://localhost:5000/admin/auth/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        });
-
-        if (!res.ok) {
-            console.error(`Error: ${res.status} - ${res.statusText}`);
-            const errorData = await res.json().catch(() => ({ error: 'Invalid response' }));
-            setError(errorData.error || 'Something went wrong');
+        try {
+            const res = await axios.post(`${API_URL}/admin/auth/signup`, formData);
+            const data = res.data;
+            if (data.success === false) {
+                setError(data.message);
+                setLoading(false);
+                return;
+            }
             setLoading(false);
-            return;
-        }
-
-        const data = await res.json();
-        if (data.success === false) {
-            setError(data.message);
+            setError(null);
+            setSuccess('Registration successful!'); // Set success message
+            console.log(data);
+        } catch (err) {
+            if (err.response && err.response.data && err.response.data.error) {
+                setError(err.response.data.error);
+            } else {
+                setError('Something went wrong');
+            }
             setLoading(false);
-            return;
         }
-
-        setLoading(false);
-        setError(null);
-        setSuccess('Registration successful!'); // Set success message
-        console.log(data);
     };
 
     return (

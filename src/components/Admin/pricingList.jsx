@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const PricingListForm = () => {
   const [pricingDetails, setPricingDetails] = useState([]);
@@ -23,24 +26,9 @@ const PricingListForm = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/pricing")
+    axios.get(`${API_URL}/pricing`)
       .then((response) => {
-        if (!response.ok) {
-          throw new Error(
-            `Failed to fetch pricing details: ${response.statusText}`
-          );
-        }
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          console.error("Unexpected content type:", contentType);
-          return Promise.reject(
-            new Error("Invalid content type, expected JSON")
-          );
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setPricingDetails(data);
+        setPricingDetails(response.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -126,22 +114,9 @@ const PricingListForm = () => {
       advancePrice: parseFloat(addFormData.advancePrice),
       premiumPrice: parseFloat(addFormData.premiumPrice),
     };
-
-    fetch("http://localhost:5000/pricing", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newService),
-    })
+    axios.post(`${API_URL}/pricing`, newService)
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to add new service");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setPricingDetails((prev) => [...prev, data]);
+        setPricingDetails((prev) => [...prev, response.data]);
         setShowAddModal(false);
         setAddFormData({
           title: "",
@@ -159,7 +134,6 @@ const PricingListForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const updatedCard = {
       ...editCard,
       ...formData,
@@ -167,27 +141,13 @@ const PricingListForm = () => {
       advancePrice: parseFloat(formData.advancePrice),
       premiumPrice: parseFloat(formData.premiumPrice),
     };
-
     setPricingDetails((prevDetails) =>
       prevDetails.map((item) =>
         item.title === editCard.title ? updatedCard : item
       )
     );
-
-    fetch(`http://localhost:5000/pricing/${encodeURIComponent(editCard.title)}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedCard),
-    })
+    axios.put(`${API_URL}/pricing/${encodeURIComponent(editCard.title)}`, updatedCard)
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to update pricing details");
-        }
-        return response.json();
-      })
-      .then((data) => {
         setEditCard(null);
       })
       .catch((error) => {

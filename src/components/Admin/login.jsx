@@ -14,6 +14,8 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -28,7 +30,7 @@ const Login = () => {
 
       let res;
       try {
-        res = await fetch('http://localhost:5000/admin/auth/login', {
+        res = await fetch(`${API_URL}/admin/auth/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

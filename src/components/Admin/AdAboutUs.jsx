@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const TeamMembers = () => {
     const [teamMembers, setTeamMembers] = useState([]);
@@ -9,13 +12,16 @@ const TeamMembers = () => {
 
     // Fetch team members
     useEffect(() => {
-        fetch("http://localhost:5000/team")
-            .then((res) => res.json())
-            .then((data) => {
-                setTeamMembers(data);
-                setFilteredMembers(data);
-            })
-            .catch((error) => console.error("Error fetching team members:", error));
+        const fetchTeamMembers = async () => {
+            try {
+                const response = await axios.get(`${API_URL}/team`);
+                setTeamMembers(response.data);
+                setFilteredMembers(response.data);
+            } catch (error) {
+                console.error("Error fetching team members:", error);
+            }
+        };
+        fetchTeamMembers();
     }, []);
 
     // Handle input change
@@ -37,23 +43,28 @@ const TeamMembers = () => {
         formDataObj.append("social", formData.social);
         formDataObj.append("image", formData.image);
 
-        const response = await fetch("http://localhost:5000/team/add", {
-            method: "POST",
-            body: formDataObj,
+        const response = await axios.post(`${API_URL}/team/add`, formDataObj, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
         });
 
-        if (response.ok) {
+        if (response.status === 200) {
             alert("Team member added!");
             setShowModal(false);
             setFormData({ name: "", designation: "",bio: "", social: "", image: null });
 
             // Refresh team members list
-            fetch("http://localhost:5000/team")
-                .then((res) => res.json())
-                .then((data) => {
-                    setTeamMembers(data);
-                    setFilteredMembers(data);
-                });
+            const fetchTeamMembers = async () => {
+                try {
+                    const response = await axios.get(`${API_URL}/team`);
+                    setTeamMembers(response.data);
+                    setFilteredMembers(response.data);
+                } catch (error) {
+                    console.error("Error fetching team members:", error);
+                }
+            };
+            fetchTeamMembers();
         } else {
             alert("Failed to add team member.");
         }
@@ -62,9 +73,9 @@ const TeamMembers = () => {
     // Handle Delete
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this member?")) {
-            const response = await fetch(`http://localhost:5000/team/delete/${id}`, { method: "DELETE" });
+            const response = await axios.delete(`${API_URL}/team/delete/${id}`);
 
-            if (response.ok) {
+            if (response.status === 200) {
                 alert("Member deleted!");
                 setTeamMembers(teamMembers.filter((member) => member._id !== id));
                 setFilteredMembers(filteredMembers.filter((member) => member._id !== id));
@@ -115,7 +126,7 @@ const TeamMembers = () => {
                 {filteredMembers.map((member) => (
                     <div key={member._id} className="bg-white shadow rounded p-4 text-center">
                         <img
-                            src={`http://localhost:5000/membersImg/${member.image}`}
+                            src={`${API_URL}/membersImg/${member.image}`}
                             alt={member.name}
                             className="w-24 h-24 rounded-full mx-auto object-cover"
                             crossOrigin="anonymous"
