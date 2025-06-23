@@ -12,7 +12,7 @@ const WhatsApp = () => {
                 phoneNumber: "+918155808720",
                 name: "Growatt InfoSystem",
                 status: "Online",
-                avatar: "../assets/title-logo.png",
+                avatar: "../assets/1.jpg",
                 welcomeMessage: "Hello, I have visited your website and am interested in your services. Could you please provide me with more information?",
                 buttonText: "Send Message",
                 autoOpen : false
