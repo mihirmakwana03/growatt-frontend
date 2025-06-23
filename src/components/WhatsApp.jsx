@@ -1,12 +1,11 @@
 import React from 'react'
 import { useEffect } from 'react';
-import WhatsAppWidget from './whatsapp';
 
 const WhatsApp = () => {
     useEffect(() => {
         const script = document.createElement('script');
         // script.src = 'https://scripts.getwidget.com/whatsapp.js';
-        script.src = WhatsAppWidget;
+        script.src = './assets/whatsapp.js';
         script.async = true;
         script.onload = () => {
             window.initWhatsAppWidget({
@@ -16,7 +15,7 @@ const WhatsApp = () => {
                 avatar: "./assets/title-logo.png",
                 welcomeMessage: "Hello, I have visited your website and am interested in your services. Could you please provide me with more information?",
                 buttonText: "Send Message",
-                autoOpen: false
+                autoOpen : false
             });
 
         };
