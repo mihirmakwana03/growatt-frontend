@@ -194,19 +194,3 @@ function AdInquiry() {
 }
 
 export default AdInquiry;
-              Delete
-            </button>
-            <button
-              className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2 hover:bg-gray-400"
-              onClick={closeDeleteModal}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default AdInquiry;
