@@ -26,7 +26,7 @@ const WhatsApp = () => {
         };
     }, []);
 
-    return <div id="whatsapp-widget"></div>;
+    return <div id="whatsapp-widget" className='text-black'></div>;
 };
 
 export default WhatsApp;
