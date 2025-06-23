@@ -5,7 +5,8 @@ const WhatsApp = () => {
     useEffect(() => {
         const script = document.createElement('script');
         // script.src = 'https://scripts.getwidget.com/whatsapp.js';
-        script.src = './assets/whatsapp.js';
+        // script.src = './whatsapp.js';
+        script.src = 'https://github.com/mihirmakwana03/Brilliance.github.io/blob/main/whatsapp.js';
         script.async = true;
         script.onload = () => {
             window.initWhatsAppWidget({
