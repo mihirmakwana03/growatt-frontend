@@ -1,12 +1,11 @@
 import React from 'react'
 import { useEffect } from 'react';
-import whatsapp from './whatsapp.js';
 
 const WhatsApp = () => {
     useEffect(() => {
         const script = document.createElement('script');
         // script.src = 'https://scripts.getwidget.com/whatsapp.js';
-        script.src = whatsapp;
+        script.src = './whatsapp.js';
         script.async = true;
         script.onload = () => {
             window.initWhatsAppWidget({
