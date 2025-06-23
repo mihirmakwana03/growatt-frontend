@@ -39,22 +39,22 @@ export default function Home() {
           </Canvas>
         </div>
         <div className="relative z-10 h-full flex items-center">
-          <div className="max-w-7xl mx-auto px-6 pt-20 flex flex-col items-center text-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20 flex flex-col items-center text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               className="max-w-3xl"
             >
-              <h2 className="text-6xl font-bold font-poppins leading-tight mb-6 gsap-fade-up">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-poppins leading-tight mb-4 sm:mb-6 gsap-fade-up">
                 Transforming Ideas into
                 <span className="text-gradient"> Visual Excellence</span>
               </h2>
-              <p className="text-xl text-gradient mb-8 gsap-fade-up">
+              <p className="text-lg sm:text-xl text-gradient mb-6 sm:mb-8 gsap-fade-up px-2">
                 Elevating brands through innovative design solutions since 2020
               </p>
               <button
-                className="button-gradient px-8 py-3 rounded-lg font-medium text-white gsap-fade-up"
+                className="button-gradient px-6 sm:px-8 py-3 rounded-lg font-medium text-white gsap-fade-up text-sm sm:text-base"
                 onClick={() => (window.location.href = '/contact')}
               >
                 Get Started
@@ -65,20 +65,20 @@ export default function Home() {
       </section>
 
       {/* Featured Services */}
-      <section className="py-24 bg-gradient-to-b from-[#0a0a0a] via-[#181818] to-[#0a0a0a] relative overflow-hidden">
+      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#0a0a0a] via-[#181818] to-[#0a0a0a] relative overflow-hidden">
         {/* Decorative background shapes */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-tr from-[#ff6d00]/30 to-[#00ffff]/20 rounded-full blur-3xl opacity-70 pointer-events-none"></div>
-        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-br from-[#00ffff]/30 to-[#ff6d00]/20 rounded-full blur-3xl opacity-70 pointer-events-none"></div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <h2 className="text-5xl font-extrabold text-center mb-6 gsap-fade-up text-gradient bg-clip-text drop-shadow-lg">
+        <div className="absolute -top-32 -left-32 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-tr from-[#ff6d00]/30 to-[#00ffff]/20 rounded-full blur-3xl opacity-70 pointer-events-none"></div>
+        <div className="absolute -bottom-32 -right-32 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-br from-[#00ffff]/30 to-[#ff6d00]/20 rounded-full blur-3xl opacity-70 pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center mb-4 sm:mb-6 gsap-fade-up text-gradient bg-clip-text drop-shadow-lg">
             <span className="text-gradient">
               Our Featured Services
             </span>
           </h2>
-          <p className="text-xl text-center mb-14 gsap-fade-up max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-center mb-10 sm:mb-14 gsap-fade-up max-w-2xl mx-auto px-4">
             Discover a full suite of creative solutions designed to elevate your brand and captivate your audience.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
             {[
               {
                 href: "/services/logo-design",
@@ -177,28 +177,28 @@ export default function Home() {
               <a
                 key={service.title}
                 href={service.href}
-                className={`relative group p-8 rounded-3xl bg-gradient-to-br from-[#181818] via-[#232526] to-[#1a1a1a] shadow-2xl border border-[#232526] hover:scale-105 hover:shadow-3xl transition-all duration-300 flex flex-col items-center text-center overflow-hidden`}
+                className={`relative group p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#181818] via-[#232526] to-[#1a1a1a] shadow-2xl border border-[#232526] hover:scale-105 hover:shadow-3xl transition-all duration-300 flex flex-col items-center text-center overflow-hidden`}
                 style={{
                   boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
                   border: '1px solid rgba(255,255,255,0.1)',
                 }}
               >
-                <span className="inline-block mb-4 animate-bounce">{service.icon}</span>
-                <h3 className="text-2xl font-extrabold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#00ffff] to-[#ff6d00] group-hover:from-[#ff6d00] group-hover:to-[#00ffff] transition-colors duration-300 text-gradient drop-shadow-lg">
+                <span className="inline-block mb-3 sm:mb-4 animate-bounce">{service.icon}</span>
+                <h3 className="text-xl sm:text-2xl font-extrabold mb-2 sm:mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#00ffff] to-[#ff6d00] group-hover:from-[#ff6d00] group-hover:to-[#00ffff] transition-colors duration-300 text-gradient drop-shadow-lg">
                   {service.title}
                 </h3>
-                <p className="text-gray-300 text-base mb-4">{service.desc}</p>
-                <span className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <svg className="w-6 h-6 text-[#ff6d00]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                <p className="text-gray-300 text-sm sm:text-base mb-4">{service.desc}</p>
+                <span className="absolute top-3 sm:top-4 right-3 sm:right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#ff6d00]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                 </span>
                 <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#00ffff] to-[#ff6d00] opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
               </a>
             ))}
           </div>
-          <div className="flex justify-center mt-14">
+          <div className="flex justify-center mt-10 sm:mt-14">
             <a
               href="/services"
-              className="inline-block px-12 py-4 rounded-full bg-gradient-to-r from-[#ff6d00] to-[#00ffff] text-white font-semibold text-lg shadow-xl hover:scale-110 transition-transform duration-300 
+              className="inline-block px-8 sm:px-12 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#ff6d00] to-[#00ffff] text-white font-semibold text-base sm:text-lg shadow-xl hover:scale-110 transition-transform duration-300 
                   button-gradient text-white gsap-fade-up border-2 border-white/10"
               style={{
                 boxShadow: '0 4px 24px 0 rgba(0,255,255,0.15), 0 1.5px 8px 0 rgba(255,109,0,0.12)',
@@ -211,11 +211,11 @@ export default function Home() {
       </section>
 
       {/* Recent Work Section */}
-      <section className="py-24 bg-gradient-to-b from-[#181818] via-[#232526] to-[#0a0a0a] relative overflow-hidden">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#00ffff]/20 to-[#ff6d00]/10 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#181818] via-[#232526] to-[#0a0a0a] relative overflow-hidden">
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-gradient-to-tr from-[#00ffff]/20 to-[#ff6d00]/10 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <h2
-            className="text-5xl font-extrabold text-center mb-12 gsap-fade-up bg-clip-text"
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center mb-8 sm:mb-12 gsap-fade-up bg-clip-text"
             style={{
               background: "linear-gradient(to right, var(--primary), var(--secondary))",
               WebkitBackgroundClip: "text",
@@ -226,12 +226,12 @@ export default function Home() {
               Recent Work
             </span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
             {recentWorks.length > 0 ? (
               recentWorks.map((item, idx) => (
                 <div
                   key={item._id}
-                  className="relative group overflow-hidden rounded-2xl shadow-2xl border border-[#232526] bg-[#181818] hover:scale-105 transition-transform duration-300"
+                  className="relative group overflow-hidden rounded-xl sm:rounded-2xl shadow-2xl border border-[#232526] bg-[#181818] hover:scale-105 transition-transform duration-300"
                   style={{
                     boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.25)',
                   }}
@@ -240,24 +240,24 @@ export default function Home() {
                     crossOrigin='anonymous'
                     src={`${API_URL}${item.imageUrl}`}
                     alt={item.title}
-                    className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-56 sm:h-64 lg:h-72 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-6">
-                    <h3 className="text-white text-2xl font-bold drop-shadow-lg">{item.title}</h3>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-4 sm:p-6">
+                    <h3 className="text-white text-lg sm:text-xl lg:text-2xl font-bold drop-shadow-lg text-center">{item.title}</h3>
                   </div>
-                  <span className="absolute top-4 right-4 bg-gradient-to-r from-[#2A3FFB] to-[#FF6B6B] px-3 py-1 rounded-full text-xs font-semibold text-white shadow-lg opacity-80">
+                  <span className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-[#2A3FFB] to-[#FF6B6B] px-2 sm:px-3 py-1 rounded-full text-xs font-semibold text-white shadow-lg opacity-80">
                     {`#${idx + 1}`}
                   </span>
                 </div>
               ))
             ) : (
-              <p className="text-center text-gray-300 col-span-3">No recent work available.</p>
+              <p className="text-center text-gray-300 col-span-1 sm:col-span-2 lg:col-span-3">No recent work available.</p>
             )}
           </div>
-          <div className="flex justify-center mt-14">
+          <div className="flex justify-center mt-10 sm:mt-14">
             <a
               href="/portfolio"
-              className="inline-block px-10 py-4 rounded-full bg-gradient-to-r from-[#00ffff] to-[#ff6d00] text-white font-semibold text-lg shadow-lg hover:scale-105 transition-transform duration-300 
+              className="inline-block px-8 sm:px-10 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#00ffff] to-[#ff6d00] text-white font-semibold text-base sm:text-lg shadow-lg hover:scale-105 transition-transform duration-300 
                         button-gradient text-white gsap-fade-up border-2 border-white/10"
             >
               View Full Portfolio
@@ -268,9 +268,9 @@ export default function Home() {
       <TestimonialSlider />
 
       {/* Add the Google Reviews widget */}
-      {/* <section className="py-20 bg-[#0a0a0a]">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-12 gsap-fade-up text-[#ff6d00]">
+      {/* <section className="py-16 sm:py-20 bg-[#0a0a0a]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 gsap-fade-up text-[#ff6d00]">
             Customer Reviews
           </h2>
           <GoogleReviewsWidget />
@@ -279,16 +279,16 @@ export default function Home() {
 
 
       {/* Call-to-Action */}
-      <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-800">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-6 gsap-fade-up text-[#ff6d00]">
+      <section className="py-16 sm:py-20 bg-gradient-to-r from-gray-800 to-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 gsap-fade-up text-[#ff6d00]">
             Ready to Elevate Your Brand?
           </h2>
-          <p className="text-lg text-gray-200 mb-8 gsap-fade-up text-[#00ffff]">
+          <p className="text-base sm:text-lg text-gray-200 mb-6 sm:mb-8 gsap-fade-up text-[#00ffff] px-4">
             Contact us today to get started on your next big project.
           </p>
           <button
-            className="button-gradient px-8 py-3 rounded-lg font-medium text-white gsap-fade-up"
+            className="button-gradient px-6 sm:px-8 py-3 rounded-lg font-medium text-white gsap-fade-up text-sm sm:text-base"
             onClick={() => (window.location.href = '/contact')}
           >
             Contact Us
