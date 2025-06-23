@@ -23,20 +23,20 @@ const Admin = () => {
       <Routes>
         <Route path="/addAdmin" element={<Signup />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="portfolio" element={<Portfolio />} />
-        <Route path="pricing" element={<PricingListForm />} />
-        <Route path="career" element={<AdCareer />} />
-        <Route path="team" element={<AddTeamMember />} />
-        <Route path="inquiry" element={<AdInquiry />} />
-        <Route path="application" element={<Application />} />
-        <Route path="customerform" element={<CustomerForm />} />
-        <Route path="testimonials" element={<AddTestimonial />} />
-        <Route path="services" element={<Service />} />
-        <Route path="dashboard" element={<AdDashboard />} />
-        <Route path="team" element={<AddTeamMember />} />
-        <Route path="teamstories" element={<TeamStories />} />
-        <Route path="contactinfo" element={<AdminContactForm />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/pricing" element={<PricingListForm />} />
+        <Route path="/career" element={<AdCareer />} />
+        <Route path="/team" element={<AddTeamMember />} />
+        <Route path="/inquiry" element={<AdInquiry />} />
+        <Route path="/application" element={<Application />} />
+        <Route path="/customerform" element={<CustomerForm />} />
+        <Route path="/testimonials" element={<AddTestimonial />} />
+        <Route path="/services" element={<Service />} />
+        <Route path="/dashboard" element={<AdDashboard />} />
+        <Route path="/team" element={<AddTeamMember />} />
+        <Route path="/teamstories" element={<TeamStories />} />
+        <Route path="/contactinfo" element={<AdminContactForm />} />
       </Routes>
     </MainLayout>
   );
