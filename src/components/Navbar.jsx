@@ -22,7 +22,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <img 
-              src="./assets/logo-nav.png" 
+              src="../assets/logo-nav.png" 
               alt="Growatt Logo" 
               className="h-auto max-h-12 w-auto object-contain" 
               />

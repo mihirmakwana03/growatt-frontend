@@ -16,7 +16,7 @@ const ResetPassword = () => {
     <div className="min-h-screen flex items-center justify-center bg-[#0f172a] px-4">
       <div className="bg-[#1e293b] shadow-2xl rounded-2xl p-8 w-full max-w-md text-white">
         <div className="flex flex-col items-center mb-6">
-          <img src="/assets/logo-nav.png" className="w-auto h-20 mb-4" alt="logo" />
+          <img src="../assets/logo-nav.png" className="w-auto h-20 mb-4" alt="logo" />
           <h2 className="text-xl font-semibold text-white mb-1">Reset Password</h2>
           <p className="text-slate-400 text-center">
             Enter your email to receive a password reset link.

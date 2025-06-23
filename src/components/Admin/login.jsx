@@ -66,7 +66,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-[#0f172a] px-2 sm:px-4">
       <div className="bg-[#1e293b] shadow-2xl rounded-2xl p-4 sm:p-8 w-full max-w-xs sm:max-w-md text-white">
         <div className="flex flex-col items-center mb-6">
-          <img src="/assets/logo-nav.png" className="w-auto h-auto mb-4" alt="logo" />
+          <img src="../assets/logo-nav.png" className="w-auto h-auto mb-4" alt="logo" />
           <p className="text-slate-400 text-center text-sm sm:text-base">Please log in to your account</p>
           {error && (
             <div className="mb-4 text-red-500 text-sm text-center">
