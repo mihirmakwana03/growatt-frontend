@@ -97,10 +97,10 @@ export default function Career() {
       return;
     }
 
-    if (!recaptchaValue) {
-      alert("Please complete the reCAPTCHA verification");
-      return;
-    }
+    // if (!recaptchaValue) {
+    //   alert("Please complete the reCAPTCHA verification");
+    //   return;
+    // }
 
     const applicationFormData = new FormData();
     applicationFormData.append("jobId", selectedJob._id);
