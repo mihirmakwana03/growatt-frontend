@@ -4,7 +4,7 @@ import { FaTrash, FaDownload, FaRedo, FaPlus } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
-const API_URL = "http://localhost:5000/customers";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/customers";
 
 const CustomerForm = () => {
   const [customers, setCustomers] = useState([]);
