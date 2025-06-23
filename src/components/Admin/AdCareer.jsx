@@ -28,11 +28,11 @@ const CareerSection = () => {
 
   const fetchAndCleanCareers = async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get(`${API_URL}/careers`);
       const currentDate = new Date().toISOString().split("T")[0];
 
       // ✅ Remove expired jobs from the backend
-      await axios.delete(`${API_URL}/delete-expired`, {
+      await axios.delete(`${API_URL}/careers/delete-expired`, {
         data: { currentDate },
       });
 
@@ -58,7 +58,7 @@ const CareerSection = () => {
   const handleInsertCareer = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(API_URL, formState);
+      const response = await axios.post(`${API_URL}/careers`, formState);
       setCareers([...careers, response.data.career]);
       setShowForm(false);
       setFormState({
@@ -81,7 +81,7 @@ const CareerSection = () => {
       return;
 
     try {
-      await axios.delete(`${API_URL}/${id}`);
+      await axios.delete(`${API_URL}/careers/${id}`);
       setCareers((prev) => prev.filter((career) => career._id !== id));
     } catch (error) {
       console.error("❌ Failed to delete career:", error);
