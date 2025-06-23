@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
-import AdCareer from "./components/Admin/AdCareer";
+// import AdCareer from "./components/Admin/AdCareer";
 import Portfolio from "./components/Admin/AdPortfolio";
 import Service from "./components/Admin/AdService";
 import Dashboard from "./components/Admin/AdDashboard";
@@ -26,7 +26,7 @@ const Admin = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/pricing" element={<PricingListForm />} />
-        <Route path="/career" element={<AdCareer />} />
+        {/* <Route path="/career" element={<AdCareer />} /> */}
         <Route path="/team" element={<AddTeamMember />} />
         <Route path="/inquiry" element={<AdInquiry />} />
         <Route path="/application" element={<Application />} />
