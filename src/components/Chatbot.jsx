@@ -106,7 +106,7 @@ const Chatbot = () => {
       {/* Floating chat icon */}
       <div style={styles.floatingButton} onClick={() => setIsOpen(!isOpen)}>
         <img
-          src="./assets/chatbot.png"
+          src="../../assets/chatbot.png"
           alt="Chat"
           style={{
             width: "60px",
