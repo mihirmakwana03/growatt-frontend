@@ -407,7 +407,7 @@ export default function Career() {
 
                 <div className="mt-4 mb-4">
                   <ReCAPTCHA
-                    sitekey="6LdtrvgqAAAAAN49NUdPeJRUVTnmwpUbMS7ah3Is"
+                    sitekey="6LdtrvgqAAAAABmj3YRQhv7d-YzEOjkts7TyH9gR"
                     onChange={(value) => setRecaptchaValue(value)}
                     theme="dark"
                   />
