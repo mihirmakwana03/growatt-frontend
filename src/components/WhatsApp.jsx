@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 const WhatsApp = () => {
     useEffect(() => {
         const script = document.createElement('script');
-        // script.src = 'https://scripts.getwidget.com/whatsapp.js';
-        script.src = './whatsapp.js';
+        script.src = 'https://scripts.getwidget.com/whatsapp.js';
+        // script.src = './whatsapp.js';
         script.async = true;
         script.onload = () => {
             window.initWhatsAppWidget({
