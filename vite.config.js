@@ -4,6 +4,17 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  build: {
+    outDir: 'dist', // Default output directory
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000', // Local backend URL
+        changeOrigin: true,
+      },
+    },
+  },
   optimizeDeps: {
     include: ['react-redux'],
   },
