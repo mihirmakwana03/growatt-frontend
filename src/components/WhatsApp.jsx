@@ -1,21 +1,22 @@
 import React from 'react'
 import { useEffect } from 'react';
+import WhatsAppWidget from './whatsapp';
 
 const WhatsApp = () => {
     useEffect(() => {
         const script = document.createElement('script');
-        script.src = 'https://scripts.getwidget.com/whatsapp.js';
-        // script.src = './whatsapp.js';
+        // script.src = 'https://scripts.getwidget.com/whatsapp.js';
+        script.src = WhatsAppWidget;
         script.async = true;
         script.onload = () => {
             window.initWhatsAppWidget({
                 phoneNumber: "+918155808720",
                 name: "Growatt InfoSystem",
                 status: "Online",
-                avatar: "../assets/1.jpg",
+                avatar: "./assets/title-logo.png",
                 welcomeMessage: "Hello, I have visited your website and am interested in your services. Could you please provide me with more information?",
                 buttonText: "Send Message",
-                autoOpen : false
+                autoOpen: false
             });
 
         };
