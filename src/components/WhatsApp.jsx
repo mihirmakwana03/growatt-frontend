@@ -4,15 +4,15 @@ import { useEffect } from 'react';
 const WhatsApp = () => {
     useEffect(() => {
         const script = document.createElement('script');
-        script.src = 'https://scripts.getwidget.com/whatsapp.js';
-        // script.src = './assets/whatsapp.js';
+        // script.src = 'https://scripts.getwidget.com/whatsapp.js';
+        script.src = '/assets/whatsapp.js';
         script.async = true;
         script.onload = () => {
             window.initWhatsAppWidget({
                 phoneNumber: "+918155808720",
                 name: "Growatt InfoSystem",
                 status: "Online",
-                avatar: "../assets/title-logo.png",
+                avatar: "/assets/title-logo.png",
                 welcomeMessage: "Hello, I have visited your website and am interested in your services. Could you please provide me with more information?",
                 buttonText: "Send Message",
                 autoOpen : false
@@ -26,7 +26,7 @@ const WhatsApp = () => {
         };
     }, []);
 
-    return <div id="whatsapp-widget" className='text-black'></div>;
+    return <div id="whatsapp-widget"></div>;
 };
 
 export default WhatsApp;
