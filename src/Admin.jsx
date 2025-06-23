@@ -9,7 +9,6 @@ import Application from "./components/Admin/Applications";
 import AdInquiry from "./components/Admin/AdInquiry";
 import CustomerForm from "./components/Admin/CustomerForm";
 import AddTestimonial from "./components/Admin/AddTestimonial";
-import AdDashboard from "./components/Admin/AdDashboard";
 import AddTeamMember from "./components/Admin/AdAboutUs";
 import Signup from "./components/Admin/signup";
 import Profile from "./components/Admin/adProfile";
@@ -33,7 +32,6 @@ const Admin = () => {
         <Route path="customerform" element={<CustomerForm />} />
         <Route path="testimonials" element={<AddTestimonial />} />
         <Route path="services" element={<Service />} />
-        <Route path="dashboard" element={<AdDashboard />} />
         <Route path="team" element={<AddTeamMember />} />
         <Route path="teamstories" element={<TeamStories />} />
         <Route path="contactinfo" element={<AdminContactForm />} />
