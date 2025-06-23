@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import Chatbot from '../../assets/chatbot.png';
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
@@ -107,8 +106,8 @@ const Chatbot = () => {
       {/* Floating chat icon */}
       <div style={styles.floatingButton} onClick={() => setIsOpen(!isOpen)}>
         <img
-          src={Chatbot}
-          alt="Chatbot"
+          src="/assets/chatbot.png"
+          alt="Chatbot Icon"
           style={{
             width: "60px",
             height: "60px",
