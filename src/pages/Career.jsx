@@ -407,7 +407,7 @@ export default function Career() {
 
                 <div className="mt-4 mb-4">
                   <ReCAPTCHA
-                    sitekey="6LdtrvgqAAAAABmj3YRQhv7d-YzEOjkts7TyH9gR"
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
                     onChange={(value) => setRecaptchaValue(value)}
                     theme="dark"
                   />
