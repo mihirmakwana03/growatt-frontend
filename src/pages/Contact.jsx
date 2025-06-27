@@ -315,7 +315,7 @@ export default function Contact() {
                 )}
               </div>
               <ReCAPTCHA
-                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                sitekey="6Lch4W8rAAAAAPnP84CAAkW3iBFN5vtSuE7UGbym"
                 onChange={onRecaptchaChange}
                 theme="dark"
               />
